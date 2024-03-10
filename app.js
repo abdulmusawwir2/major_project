@@ -3,11 +3,13 @@ const app=express();
 const mongoose = require('mongoose');
 const Listing=require("./models/listing");
 const path=require("path");
+const methodOverride = require('method-override')
 
 
 app.set( "view engine", "ejs" ); 
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}))
+app.use(methodOverride('_method'))
 
 main()
 .then(()=>{
@@ -67,11 +69,11 @@ app.get("/listings/:id/edit",async (req,res)=>{
     res.render("listings/edit.ejs",{listing})
 })
 
-// app.put("/listings/:id",async(req,res)=>{
-//     let {id}=req.params;
-//     await Listing.findByIdAndUpdate(id,{...req.body.listining})
-//     res.redirect("/listining") 
-// })
+app.put("/listings/:id",async(req,res)=>{
+    let {id}=req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listining})
+    res.redirect("/listining") 
+})
 
 
 
