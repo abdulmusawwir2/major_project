@@ -1,17 +1,37 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
-    <h3>listing details</h3>
-    <ul>
-        <li> <%=listing.title %> </li>
-        <li> <%=listing.description %> </li>
-        <li> &#x20B9;<%=listing.price%> </li>
-        <li> <%=listing.location %> </li>
-        <li> <%=listing.country %> </li>
-    </ul>
-    <a href="/listings/<%=listing._id%>/edit">edit the listing</a>
-    <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button>Delete this listing</button>
-    </form>
+<div class="row mt-3">
+    <div class="col-8 offset-2 mt-3">
+    <h3 >listing details</h3>
+  </div>
+    <div class="card col-6 offset-2 show-card" >
+        <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_image">
 
+        <div class="card-body">
+          <p class="card-text">
+          <b> <%=listing.title %> </b> <br>
+        <b> <%=listing.description %> </b> <br>
+        <b> &#x20B9;<%=listing.price%> </b> <br>
+        <b> <%=listing.location %> </b> <br>
+        <b> <%=listing.country %> </b> <br>
+      </p>
+      <br>
+        </div>
+      </div>
+
+    
+    <div class="btns">
+        <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 offset-2 edit-btn">Edit</a>
+
+        <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
+            <button class="btn btn-dark offset-4">Delete</button>
+        </form>
+        
+    </div>
+   
+
+    
+</div>
+<br><br><br>
 </body>
 </html>
