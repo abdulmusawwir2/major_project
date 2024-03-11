@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wander lust</title>
-</head>
-<body>
+<% layout("/layouts/boilerplate.ejs") %>
+
+
     <h2>Create a new listing </h2>
     <form method="POST" action="/listings">
         <input type="text" name="listing[title]" placeholder="enter title">

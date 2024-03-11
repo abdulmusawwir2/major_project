@@ -4,16 +4,19 @@ const mongoose = require('mongoose');
 const Listing=require("./models/listing");
 const path=require("path");
 const methodOverride = require('method-override')
+const ejsMate=require("ejs-mate")
 
 
 app.set( "view engine", "ejs" ); 
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}))
 app.use(methodOverride('_method'))
+app.engine("ejs",ejsMate);
+app.use(express.static(path.join(__dirname,"/public")));
 
 main()
 .then(()=>{
-    console.log("connected to database")
+    console.log("connected to database") 
 })
 .catch(err => console.log(err));
 
@@ -69,11 +72,20 @@ app.get("/listings/:id/edit",async (req,res)=>{
     res.render("listings/edit.ejs",{listing})
 })
 
-app.put("/listings/:id",async(req,res)=>{
+app.put("/listings/:id", async (req, res) => {
+    let { id } = req.params;
+    const updatedListing = await Listing.findByIdAndUpdate(id, req.body.listing, {
+      new: true,
+    });
+    res.redirect("/listings");
+  });
+
+  app.delete("/listings/:id",async(req,res)=>{
     let {id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listining})
-    res.redirect("/listining") 
-})
+    let deletedListing=await Listing.findByIdAndDelete(id)
+    console.log(deletedListing)
+    res.redirect("/listings")
+  })
 
 
 
