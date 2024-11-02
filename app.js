@@ -64,8 +64,6 @@ const sessionOptions = {
     })
 };
 
-
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -100,6 +98,10 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   console.error("Global error handler:", err.stack);
   res.status(500).send("Something went wrong!");
+});
+
+app.get('/', (req, res) => {
+    res.redirect('/listings');
 });
 
 // Start server
