@@ -89,10 +89,6 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);  
 app.use("/", userRouter);
 
-// Root route for testing
-app.get("/", (req, res) => {
-  res.send("Root route working");
-});
 
 // Catch-all route for handling 404 errors
 app.all("*", (req, res, next) => {
