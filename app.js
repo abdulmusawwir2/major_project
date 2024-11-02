@@ -82,6 +82,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+    res.redirect('/listings');
+});
+
 // Define routes
 app.use("/listings", listingRouter); 
 app.use("/listings/:id/reviews", reviewRouter);  
@@ -100,9 +104,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
-app.get('/', (req, res) => {
-    res.redirect('/listings');
-});
+
 
 // Start server
 app.listen(3000, () => {
